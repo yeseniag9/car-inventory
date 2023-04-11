@@ -52,19 +52,15 @@ class Car(db.Model):
     id =  db.Column(db.String, primary_key = True)
     make = db.Column(db.String(150))
     model = db.Column(db.String(150))
-    year = db.Column(db.String(10))
-    price = db.Column(db.String(20))
-    mileage = db.Column(db.String(10))
-    color = db.Column(db.String(50))
+    year = db.Column(db.String(100))
+    color = db.Column(db.String(150))
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
-    def __init__(self, make, model, year, price, mileage, color, user_token, id=''):
+    def __init__(self, make, model, year, color, user_token, id=''):
         self.id = self.set_id()
         self.make = make
         self.model = model
         self.year = year
-        self.price = price
-        self.mileage = mileage
         self.color = color
         self.user_token = user_token
 
@@ -76,7 +72,7 @@ class Car(db.Model):
 
 class CarSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'make', 'model', 'year', 'price', 'mileage', 'color']
+        fields = ['id', 'make', 'model', 'year', 'color']
 
 car_schema = CarSchema() 
 cars_schema = CarSchema(many = True) 
